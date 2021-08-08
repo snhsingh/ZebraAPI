@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "3c8d47d5-82cb-4d51-a3fe-d516f32a9062",
+		"name": "cowin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "generateOTP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"var txnID = jsonData.txnId;\r",
+							"pm.globals.set(\"txnID\", txnID);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"mobile\": \"9980131128\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cdn-api.co-vin.in/api/v2/auth/public/generateOTP",
+					"protocol": "https",
+					"host": [
+						"cdn-api",
+						"co-vin",
+						"in"
+					],
+					"path": [
+						"api",
+						"v2",
+						"auth",
+						"public",
+						"generateOTP"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bearer Token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"otp\": \"77f3254e44b9f9d1dab8fd791a619ea6b93f38a3dad54a8f335e35ccd8560c78\",\r\n  \"txnId\": \"{{txnID}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cdn-api.co-vin.in/api/v2/auth/public/confirmOTP",
+					"protocol": "https",
+					"host": [
+						"cdn-api",
+						"co-vin",
+						"in"
+					],
+					"path": [
+						"api",
+						"v2",
+						"auth",
+						"public",
+						"confirmOTP"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get vaccination sessions by PIN",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "district",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	]
+}
